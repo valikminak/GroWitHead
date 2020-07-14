@@ -1,0 +1,50 @@
+.learning {
+  display: grid;
+  grid-template-columns: 2fr 3fr 6fr;
+  background-color: #4263ec;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.learningHeader {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 3px solid #000000;
+}
+.learningList {
+  padding-left: 20px;
+}
+.learningList__add {
+  margin-top: 20px;
+}
+.learningList__list {
+  margin-top: 20px;
+}
+.learningSubjects {
+  width: 100%;
+  height: 100vh;
+  border-right: 3px solid #000000;
+}
+.learningCategory {
+  width: 100%;
+  height: 100vh;
+  border-right: 3px solid #000000;
+}
+.learningText {
+  width: 100%;
+  height: 100vh;
+}
+.learningText__list {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr 3fr;
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  padding-right: 20px;
+  margin-top: 20px;
+}
+.learningText__window {
+  position: relative;
+  height: 100%;
+}
+
+/*# sourceMappingURL=Style.css.map */

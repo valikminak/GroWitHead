@@ -1,0 +1,43 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1c1327;
+  width: 100%;
+  height: 100vh;
+
+  &Logo {
+    & img {
+      width: 500px;
+    }
+  }
+
+  &List {
+    display: grid;
+    grid-template-columns: 6fr 6fr;
+    grid-column-gap: 70px;
+    & a{
+      color: #000000;
+    }
+    &__choice{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background-color: red;
+      &:hover{
+        opacity: .7;
+      }
+
+    }
+    & .learning{
+      background-color: #1AFFFF;
+    }
+    & .todo{
+      background-color: #1FFFC2;
+    }
+  }
+}

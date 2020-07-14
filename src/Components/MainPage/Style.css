@@ -1,0 +1,40 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1c1327;
+  width: 100%;
+  height: 100vh;
+}
+.mainLogo img {
+  width: 500px;
+}
+.mainList {
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  grid-column-gap: 70px;
+}
+.mainList a {
+  color: #000000;
+}
+.mainList__choice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: red;
+}
+.mainList__choice:hover {
+  opacity: 0.7;
+}
+.mainList .learning {
+  background-color: #1AFFFF;
+}
+.mainList .todo {
+  background-color: #1FFFC2;
+}
+
+/*# sourceMappingURL=Style.css.map */

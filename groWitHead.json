@@ -1,0 +1,17 @@
+{
+  "learning":{
+    "category": [
+      {
+        "name": "name"
+      }
+    ],
+    "text": [
+      {
+        "text": "someText"
+      }
+    ]
+  },
+
+  "todo": [
+  ]
+}
