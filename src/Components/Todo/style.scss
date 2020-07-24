@@ -1,3 +1,4 @@
+@import "./src/styles/mixins";
 * {
   box-sizing: border-box;
 
@@ -20,21 +21,63 @@ body {
   width: 100%;
   height: 100vh;
   background-color: #4BBF6B;
+  overflow-y: hidden;
 
   &Header {
     color: #ffffff;
 
     &__title {
+      @include header;
+      justify-content: center;
+      position: relative;
+    }
+
+    &__boards {
+      position: absolute;
       display: flex;
       justify-content: center;
-      align-items: center;
-      background-color: #40A35B;
+      align-items: flex-start;
+      left: 30px;
+      top: 10px;
+      cursor: pointer;
+      font-size: 11px;
+
+      & img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+
+    &__boardsList {
+      @include header;
+      justify-content: flex-start;
+      white-space: nowrap;
+      overflow-x: auto;
+
+      & a {
+        color: #ffffff;
+      }
+    }
+
+    &__board {
+      padding: 5px;
+      margin-left: 5px;
+      cursor: pointer;
     }
 
     &__name {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: right;
+      margin: 10px;
+      height: 35px;
+    }
+
+    &__add {
+      @include add(200px, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.2));
+    }
+
+    &__addNewBoard {
+      @include input;
     }
   }
 
@@ -63,66 +106,26 @@ body {
   }
 
   &Content {
-    max-height: 100%;
+    height: 100%;
     white-space: nowrap;
     overflow-y: hidden;
+    padding-left: 10px;
 
     &__add {
-      display: inline-block;
-      text-align: center;
-      padding: 8px 6px;
-      width: 272px;
-      border-radius: 5px;
-      cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      position: relative;
+      @include add(272px, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.35));
 
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.35);
-      }
-
-      &::before {
-        position: absolute;
-        content: "+";
-        font-size: 25px;
-        left: 25px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
     }
 
     &__input {
-      display: inline-block;
-      width: 272px;
-      background-color: #EBECF0;
-      border-radius: 5px;
-      padding: 5px;
+      @include input;
+    }
 
-      & input {
-        width: 100%;
-        padding: 5px 20px;
-        border-radius: 5px;
-        border: 2px solid #0079BF;
-        outline: none;
-      }
-
-      & button {
-        padding: 5px 20px;
-        border-radius: 5px;
-        background-color: #4BBF6B;
-        border: none;
-        outline: none;
-        color: #ffffff;
-        margin: 5px 10px 0 0;
-        cursor: pointer;
-      }
-
-      & span {
-        cursor: pointer;
-      }
+    &__boardName {
+      color: #ffffff;
+      margin-bottom: 20px;
     }
   }
+
 }
 
 .column {
@@ -148,7 +151,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 15px;
+    padding: 0 10px 10px 0;
     font-size: 18px;
     min-height: 20px;
     overflow: hidden;
@@ -159,21 +162,14 @@ body {
       width: 205px;
     }
 
-    & span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      border-radius: 5px;
-      color: rgba(0, 0, 0, .5);
-      width: 25px;
-      height: 25px;
-
-      &:hover {
-        background-color: #DADBE2;
-        color: rgba(0, 0, 0, 1);
-      }
+    & textarea {
+      width: 100%;
+      padding: 5px;
+      outline: none;
+      resize: none;
+      border: none;
     }
+
   }
 
   .columnContent::-webkit-scrollbar-track {
@@ -195,73 +191,85 @@ body {
   }
 
   &Content {
-    max-height: 500px;
-    overflow-y: scroll;
-    overflow-x: auto;
+    max-height: 400px;
+    overflow-y: auto;
     margin: 0;
     font-size: 13px;
   }
 
-  &Footer__add {
-    max-height: 33px;
-    min-height: 33px;
+  &Footer {
+    &__add {
+      max-height: 33px;
+      min-height: 33px;
 
-    & button {
-      padding: 5px 30px;
-      cursor: pointer;
-      position: relative;
-      width: 60%;
-      max-height: 100%;
-      border: none;
-      background-color: #EBECF0;
-      outline: none;
-      border-radius: 5px;
+      & button {
+        padding: 5px 30px;
+        cursor: pointer;
+        position: relative;
+        width: 60%;
+        max-height: 100%;
+        border: none;
+        background-color: #EBECF0;
+        outline: none;
+        border-radius: 5px;
 
-      &::before {
-        position: absolute;
-        content: "+";
-        font-size: 18px;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
+        &::before {
+          position: absolute;
+          content: "+";
+          font-size: 18px;
+          left: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        &:hover {
+          background-color: #DADBE2;
+        }
       }
 
-      &:hover {
-        background-color: #DADBE2;
+    }
+
+    &__input {
+      overflow-y: hidden;
+
+      & textarea {
+        display: block;
+        padding: 5px 10px;
+        font-size: 12px;
+        width: 100%;
+        height: 60px;
+        resize: none;
+        border: none;
+        outline: none;
+      }
+
+    }
+    &__addCard {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & button {
+        padding: 5px 20px;
+        border-radius: 5px;
+        background-color: #4BBF6B;
+        border: none;
+        outline: none;
+        color: #ffffff;
+        margin: 5px 10px 0 0;
+        cursor: pointer;
+      }
+
+      & span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        cursor: pointer;
+        margin-right: 5px;
       }
     }
 
-  }
-
-  &Footer__input {
-    overflow-y: hidden;
-
-    & textarea {
-      display: block;
-      padding: 5px 10px;
-      font-size: 12px;
-      width: 100%;
-      height: 60px;
-      resize: none;
-      border: none;
-      outline: none;
-    }
-
-    & button {
-      padding: 5px 20px;
-      border-radius: 5px;
-      background-color: #4BBF6B;
-      border: none;
-      outline: none;
-      color: #ffffff;
-      margin: 5px 10px 0 0;
-      cursor: pointer;
-    }
-
-    & span {
-      cursor: pointer;
-
-    }
   }
 }
 

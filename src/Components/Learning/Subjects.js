@@ -1,52 +1,103 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
-import LearningHeader from "./Layout/LearningHeader";
+import ListLayout, {replaced} from "./Layout/ListLayout";
+import {Close} from "../../SVG/SVG";
+import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
+import {closeInput, handleDragEnd} from "../../Functions";
 
-const Subjects = ({dispatch,subjects}) => {
+
+let idSubject = 3000;
+
+
+const Subjects = ({dispatch, subjects}) => {
     const [inputValue, setInputValue] = useState('');
     const [newSubject, setNewSubject] = useState(false);
 
     const addSubject = (e) => {
-        if(inputValue.length>0){
+        if ((inputValue.length > 0 && e.key === "Enter") || (inputValue.length > 0 && e.target.nodeName === "BUTTON")) {
             dispatch({
                 type: "ADD_NEW_SUBJECT",
                 payload: {
-                    id:Math.random(),
-                    subjectName:inputValue},
+                    id: idSubject++,
+                    subjectName: inputValue
+                },
 
             });
             setNewSubject(false);
             setInputValue('')
         }
     };
-
+    const deleteItem = (id) => {
+        dispatch({
+            type: "DELETE_SUBJECT_ITEM",
+            payload: {
+                subjectId: id,
+            }
+        })
+    };
+    const subjectDragEnd = ({draggableId, destination,source}) => {
+        if (!destination) {
+            return;
+        }
+        if (destination.droppableId !== source.droppableId) {
+            return;
+        }
+        handleDragEnd(dispatch,subjects,draggableId,destination,"subjects")
+    };
     return (
-        <div className="learningSubjects">
-            <LearningHeader title={"Learning"}/>
-            <div className='learningList'>
-                <div className="learningList__add">
-                    {newSubject
-                        ? <div>
-                            <span onClick={()=>setNewSubject(false)}>
-                                X
-                            </span>
-                            <input type="text" autoFocus={true}  value={inputValue}
-                                   onChange={(e) => setInputValue(e.target.value)}/>
-                            <button onClick={(e)=>addSubject(e)} >Add</button>
-                        </div>
-                        : <p onClick={() => setNewSubject(true)}>
-                            + Add subject
-                        </p>}
+        <div className="learningSubjects" onClick={(e) => closeInput(e, newSubject, setNewSubject)}>
+            <NavLink to={'/learning'}>
+                <div onClick={() => setNewSubject(true)} className="learningHeader">
+                    Learning
                 </div>
-                <ul className='learningList__list'>
-                    {subjects && subjects.map(({name, id}) => <li key={id}><NavLink
-                        to={`/learning/${name.toLowerCase()}`}>{name}</NavLink></li>
-                    )}
-                </ul>
-            </div>
+            </NavLink>
+            <DragDropContext onDragEnd={subjectDragEnd}>
+                <div className='learningList'>
+                    <ListLayout newItem={newSubject}
+                                inputValue={inputValue} setInputValue={setInputValue}
+                                addItem={addSubject}/>
+                    <Droppable droppableId={"subjectList"}>
+                        {(provided) => {
+                            return (
+                                <ul ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                    className='learningList__list'>
+                                    {subjects && subjects.map((subject, index) => {
+                                            return (
+                                                <Draggable
+                                                    key={subject.id}
+                                                    index={index}
+                                                    draggableId={subject.name+subject.id}
+                                                >
+                                                    {(provider) => {
+                                                        return (
+                                                            <li
+                                                                ref={provider.innerRef}
+                                                                {...provider.draggableProps}
+                                                                {...provider.dragHandleProps}
+                                                            >
+                                                                <NavLink
+                                                                    to={`/learning/${replaced(subject.name)}${subject.id}`}>
+                                                                    {subject.name.length > 20 ? subject.name.slice(0, 20) + "..." : subject.name}
+                                                                </NavLink>
+                                                                <span className="deleteItem"
+                                                                      onClick={() => deleteItem(subject.id)}><Close/></span>
+                                                            </li>
+                                                        )
+                                                    }}
+                                                </Draggable>
+                                            )
+                                        }
+                                    )}
+                                </ul>
+                            )
+                        }}
+                    </Droppable>
+                </div>
+            </DragDropContext>
         </div>
 
     );
 };
 
-export default Subjects;
+export default Subjects

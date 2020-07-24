@@ -1,56 +1,97 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './style.scss'
-import TodoColumn from "./TodoColumn";
+import TodoBoard from "./TodoBoard";
+import {Redirect, Route, Switch} from "react-router";
+import {Link} from "react-router-dom";
 
-
-let listId = 1;
+let boardId = 1;
 
 const Todo = () => {
+    const [showBoards, setShowBoard] = useState(false);
+    const [boardNameValue, setBoardNameValue] = useState('');
+    const [board, setBoard] = useState(false);
+    const [boardList, setNewBoard] = useState([]);
+    const [activeBoardName, setActiveBoardName] = useState('Todo');
     const [inputValue, setInputValue] = useState('');
     const [addList, setAddList] = useState(false);
-    const [columns, setNewColumn] = useState([]);
+    const createCardInputRef = useRef();
 
+    useEffect(() => {
+        createCardInputRef.current && createCardInputRef.current.select()
+    }, [board]);
 
-    const addAnotherColumn = () => {
-        if (inputValue.length > 0) {
-                setNewColumn([...columns, {name: inputValue, id: listId++, card: []}]);
-                setInputValue("");
+    const addNewBoard = (e) => {
+        if ((boardNameValue.length > 0 && boardNameValue !== " " && e.key === "Enter") || (boardNameValue.length > 0 && boardNameValue !== " " && e.type === "click")) {
+            setNewBoard([...boardList, {name: boardNameValue, id: boardId++, columns: []}]);
+            setBoard(false);
+            setBoardNameValue('')
         }
+    };
 
+    const closeCreateInput = (e) => {
+        if (e.target.className !== "todoHeader__boards" && e.target.tagName !== "IMG") {
+            setShowBoard(false);
+        }
+        if (e.target.className === "todo" || e.target.className === "todoContent" || e.target.className === "todoHeader__name" || e.target.className === "todoContent__boardName") {
+            setBoard(false);
+            setAddList(false);
+            setBoardNameValue(boardNameValue);
+        }
+    };
+    const isActiveBoard = (boardName) => {
+        setActiveBoardName(boardName)
     };
 
     return (
-            <div className="todo">
+            <div onClick={(e) => closeCreateInput(e)} className="todo">
                 <div className="todoHeader">
-                    <h1 className="todoHeader__title">Todo</h1>
+                    {showBoards
+                        ? <div className="todoHeader__boardsList">{boardList?.map((board) => (
+                            <Link key={board.id}
+                                  to={`/todo/${board.name.replace(/\s+/g, '').toLowerCase()}${board.id}`}>
+                                <span className="todoHeader__board">{board.name}</span>
+                            </Link>))}
+                        </div>
+                        : <div>
+                            <div className="todoHeader__title">
+                            <span className="todoHeader__boards"
+                                  onClick={() => boardList.length > 0 && setShowBoard(true)}>
+                                boards
+                                <img src="/Images/showBoards.svg" alt="Boards"/>
+                            </span>
+                                <h1>{activeBoardName}</h1>
+                            </div>
+                        </div>
+                    }
                     <div className="todoHeader__name">
-                        <h2>Name</h2>
-                        <span>+</span>
+                        {board
+                            ? <div className="todoHeader__addNewBoard">
+                                <input type="text"
+                                       ref={createCardInputRef}
+                                       autoFocus={true}
+                                       value={boardNameValue}
+                                       onKeyDown={(e) => addNewBoard(e)}
+                                       onChange={(e) => setBoardNameValue(e.target.value.replace(/\s+/g, ' '))}
+                                />
+                                <button onClick={(e) => addNewBoard(e)}>Create board</button>
+                            </div>
+                            : <span onClick={() => setBoard(true)} className="todoHeader__add">Create Board</span>
+                        }
                     </div>
                 </div>
-                <div className="todoContent">
-                    {columns && columns.map((column) => <TodoColumn
-                                                                    key={column.id} column={column} columns={columns}
-                                                                    inputValue={inputValue} setInputValue={setInputValue}
-                                                                    setAddList={setAddList}
-                                                                    setNewColumn={setNewColumn}
-                    />)}
-                    {!addList && columns.length === 0 &&
-                    <div onClick={() => setAddList(true)} className="todoContent__add">
-                        Add new list
-                    </div>}
-                    {!addList && columns.length > 0 &&
-                    <div onClick={() => setAddList(true)} className="todoContent__add">
-                        Add another one column
-                    </div>}
-                    {addList && <div className="todoContent__input">
-                        <input placeholder="Enter a list title" autoFocus={true} value={inputValue}
-                               onChange={(e) => setInputValue(e.target.value)} type="text"/>
-                        <div>
-                            <button onClick={addAnotherColumn}>Add list</button>
-                        </div>
-                    </div>}
-                </div>
+                <Switch>
+                    {boardList.map((board) => <Route key={board.id}
+                                                     path={`/todo/${board.name.replace(/\s+/g, '').toLowerCase()}${board.id}`}
+                                                     render={() => <TodoBoard
+                                                         board={board} boardList={boardList}
+                                                         inputValue={inputValue} setInputValue={setInputValue}
+                                                         setNewBoard={setNewBoard}
+                                                         addList={addList} setAddList={setAddList}
+                                                         isActiveBoard={isActiveBoard}
+                                                     />}/>)}
+                    {boardList.length === 1 &&
+                    <Redirect to={`/todo/${boardList[0].name.replace(/\s+/g, '').toLowerCase()}${boardList[0].id}`}/>}
+                </Switch>
             </div>
     );
 };

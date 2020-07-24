@@ -1,93 +1,157 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {memo, useEffect, useRef, useState} from 'react';
 import './style.scss'
-import TodoCard from "./todoCard";
+import TodoCard from "./TodoCard";
+import {Droppable} from "react-beautiful-dnd";
 
-let cardId = 200;
+let cardId = 2000;
 
-const TodoColumn = ({column, columns, setAddList, setNewColumn,inputValue,setInputValue}) => {
-    const [inputCardValue, setInputCardValue] = useState();
-    const [addCard, setAddCard] = useState(false);
-    const [changeColumnValue, setColumnValue] = useState(column.name);
-    const [changeColumnName, setNewColumnName] = useState(false);
-    const columnRef = useRef(null);
-    const columnNameRef = useRef(null);
-
-    useEffect(() => {
-        columnRef.current.focus();
-    }, [column]);
-
-    const addNewCard = () => {
-        if (inputCardValue&&inputCardValue.length > 0) {
-            setNewColumn(
-                columns.map((item) => item.id === column.id
-                    ? {
-                        ...item,
-                        card: [...item.card, {name: inputCardValue, id: cardId++}]
-                    }
-                    : item)
-            );
-            setInputCardValue('');
-        }
-    };
-    const deleteCard = (id) => {
-        setNewColumn(
-            columns.map((item) => item.name === column.name
+const TodoColumn = memo(({board, boardList, column, setNewBoard}) => {
+        const addImportantDone = (isImportant = false, importantCardId = null, isDone = false, doneCardId = null) => {
+            return boardList.map((boardListItem) => boardListItem.id === board.id
                 ? {
-                    ...item,
-                    card: item.card.filter((card) => card.id !== id
+                    ...boardListItem,
+                    columns: boardListItem.columns.map((columnsItem) => columnsItem.id === column.id
+                        ? importantCardId || doneCardId ? {
+                            ...columnsItem,
+                            cards: column.cards.map((card) => (importantCardId ? card.id === importantCardId : card.id === doneCardId)
+                                ? {    //Important Done
+                                    name: card.name,
+                                    id: card.id,
+                                    important: importantCardId ? isImportant : card.important,
+                                    done: doneCardId ? isDone : card.done
+                                }
+                                : card
+                            )
+                        } : { //Add New Card
+                            ...columnsItem,
+                            cards: [...columnsItem.cards, {
+                                name: inputCardValue,
+                                id: cardId++,
+                                important: false,
+                                done: false
+                            }]
+                        }
+                        : columnsItem
                     )
                 }
-                : item)
-        );
-    };
+                : boardListItem
+            )
+        };
+
+        const [inputCardValue, setInputCardValue] = useState('');
+        const [addCard, setAddCard] = useState(false);
+        const [changeColumnValue, setColumnValue] = useState(column.name);
+        const [newColumnName, setNewColumnName] = useState(false);
+        const columnNameRef = useRef(null);
+        const columnCardNameRef = useRef(null);
+
+        useEffect(() => {
+            columnNameRef.current && columnNameRef.current.focus();
+            columnNameRef.current && columnNameRef.current.select();
+        }, [newColumnName]);
+        useEffect(() => {
+            columnCardNameRef.current && columnCardNameRef.current.focus();
+        }, [addCard]);
 
 
-    const columnName = () => {
-        console.log("Hey")
-        // column.name = changeInputValue;
-        // setChangeInputValue(column.name);
-        // setChange(false);
-    };
-    //
-    // useEffect(() => {
-    //     columnNameRef.current.select()
-    // },[columnNameRef.current]);
+        const addNewCard = (e) => {
+            if ((inputCardValue && inputCardValue.length > 0 && inputCardValue !== " " && e.key === "Enter")
+                || (inputCardValue && inputCardValue.length > 0 && inputCardValue !== " " && e.type === "click")
+                || (inputCardValue && inputCardValue.length > 0 && inputCardValue !== " " && e.type === "blur")) {
+                setNewBoard(addImportantDone());
+                setInputCardValue('');
+            }
 
-    const closeInput = () => {
-        addNewCard();
-        setAddCard(false);
-        setAddList(false)
-    };
-
-    return (
-        <div ref={columnRef} onBlur={closeInput} className="columnWrapper">
-            <div className="column">
-                <div className="columnHeader">
-                    {!changeColumnName&&<h5 onClick={()=>setNewColumnName(true)}>{column.name}</h5>}
-                    {changeColumnName&& <textarea ref={columnNameRef} value={changeColumnValue} onChange={(e)=>setColumnValue(e.target.value)}/>}
-                    <span>...</span>
+        };
+        const importantCard = (isImportant, importantCardId) => {
+            setNewBoard(addImportantDone(isImportant, importantCardId));
+        };
+        const cardDone = (isDone, doneCardId) => {
+            setNewBoard(addImportantDone(undefined, undefined, isDone, doneCardId))
+        };
+        const deleteCard = (id) => {
+            setNewBoard(
+                boardList.map((boardListItem) => boardListItem.id === board.id
+                    ? {
+                        ...boardListItem,
+                        columns: boardListItem.columns.map((columnsItem) => columnsItem.id === column.id
+                            ? {
+                                ...columnsItem,
+                                cards: columnsItem.cards.filter((card) => card.id !== id)
+                            }
+                            : columnsItem
+                        )
+                    }
+                    : boardListItem
+                )
+            );
+        };
+        const changeColumnName = (e, columnId) => {
+            if ((changeColumnValue && changeColumnValue.length > 0 && changeColumnValue !== " " && e.key === "Enter")
+                || (changeColumnValue && changeColumnValue.length > 0 && changeColumnValue !== " " && e.type === "blur")) {
+                boardList.find((boardListItem) => boardListItem.id === board.id).columns.find((column) => column.id === columnId).name = changeColumnValue;
+                setNewColumnName(false)
+            }
+        };
+        return (
+            <div className="columnWrapper">
+                <div className="column">
+                    <div className="columnHeader">
+                        {!newColumnName && <h5 onClick={() => setNewColumnName(true)}>{column.name}</h5>}
+                        {newColumnName &&
+                        <textarea ref={columnNameRef} onKeyDown={(e) => changeColumnName(e, column.id)}
+                                  onBlur={(e) => changeColumnName(e, column.id)} value={changeColumnValue}
+                                  onChange={(e) => setColumnValue(e.target.value)}/>}
+                    </div>
+                    <Droppable droppableId={column.name}>
+                        {(provided) => {
+                            return (
+                                <ul
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                    className="columnContent">
+                                    {column.cards && column.cards.map((card, index) => {
+                                            return (
+                                                <TodoCard key={card.id}
+                                                          index={index}
+                                                          card={card}
+                                                          deleteCard={deleteCard}
+                                                          importantCard={importantCard}
+                                                          cardDone={cardDone}/>
+                                            )
+                                        }
+                                    )}
+                                </ul>
+                            )
+                        }}
+                    </Droppable>
+                    <div className="columnFooter">
+                        {!addCard && column.cards.length === 0 &&
+                        <div className="columnFooter__add">
+                            <button onClick={() => setAddCard(true)}>Add</button>
+                        </div>}
+                        {!addCard && column.cards.length > 0 && <div className="columnFooter__add">
+                            <button onClick={() => setAddCard(true)}>Add one more card</button>
+                        </div>}
+                        {addCard &&
+                        <div onKeyDown={(e) => addNewCard(e)} className="columnFooter__input">
+                    <textarea
+                        onBlur={(e) => addNewCard(e)}
+                        ref={columnCardNameRef}
+                        value={inputCardValue}
+                        onChange={(e) => setInputCardValue(e.target.value.replace(/\s+/g, ' '))}
+                        placeholder="Enter some title for this card"/>
+                            <div className="columnFooter__addCard">
+                                <button onClick={(e) => addNewCard(e)}>Add card</button>
+                                <span onClick={() => setAddCard(false)}>-</span>
+                            </div>
+                        </div>}
+                    </div>
                 </div>
-                <ul className="columnContent">
-                    {column.card && column.card.map((card) =>
-                        <TodoCard key={card.id} card={card} deleteCard={deleteCard}
-                        />)}
-                </ul>
-                {!addCard && column.card.length === 0 &&
-                <div className="columnFooter__add">
-                    <button onClick={() => setAddCard(true)}>Add</button>
-                </div>}
-                {!addCard && column.card.length > 0 && <div className="columnFooter__add">
-                    <button onClick={() => setAddCard(true)}>Add one more card</button>
-                </div>}
-                {addCard &&
-                <div className="columnFooter__input">
-                    <textarea value={inputCardValue} autoFocus={true} onChange={(e) => setInputCardValue(e.target.value)}
-                              placeholder="Enter some title for this card"/>
-                    <button onClick={addNewCard}>Add card</button>
-                </div>}
             </div>
-        </div>
-    );
-};
+        )
+            ;
+    })
+;
 
 export default TodoColumn;

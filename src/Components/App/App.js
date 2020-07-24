@@ -8,17 +8,17 @@ import MainPage from "../MainPage/MainPage";
 
 const App = () => {
 
-
     return (
-            <div className="app">
-                <Switch>
-                    <Route path={'/'} component={MainPage} exact/>
-                    <Route path={'/learning/:category?/:text?'} component={Learning}/>
-                    <Route path={'/todo/:name?'} component={Todo}/>
-                </Switch>
-            </div>
+        <div className="app">
+
+                    <Switch>
+                        <Route path={'/'} component={MainPage} exact/>
+                        <Route path={'/learning/:category?/:text?'} component={Learning}/>
+                        <Route path={'/todo/:name?'} component={Todo}/>
+                    </Switch>
+        </div>
 
     );
 };
 
-export default App;
+export default App
