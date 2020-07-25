@@ -27,7 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Examples/Co-co-Combo/src/Components/DnD/BeautifulWithHooks/BeautifulWithHooks.js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pasta-pizza/package.json" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -71,7 +71,7 @@
       <workItem from="1595399174573" duration="18973000" />
       <workItem from="1595484452693" duration="34047000" />
       <workItem from="1595573000519" duration="20271000" />
-      <workItem from="1595674149180" duration="15279000" />
+      <workItem from="1595674149180" duration="15806000" />
     </task>
     <servers />
   </component>
@@ -92,10 +92,10 @@
       <screen x="0" y="43" width="1536" height="821" />
     </state>
     <state x="465" y="255" key="EditFileWatcherDialog/0.43.1536.821@0.43.1536.821" timestamp="1594785885408" />
-    <state x="549" y="211" key="FileChooserDialogImpl" timestamp="1595678561192">
+    <state x="549" y="211" key="FileChooserDialogImpl" timestamp="1595690317754">
       <screen x="0" y="43" width="1536" height="821" />
     </state>
-    <state x="549" y="211" key="FileChooserDialogImpl/0.43.1536.821@0.43.1536.821" timestamp="1595678561192" />
+    <state x="549" y="211" key="FileChooserDialogImpl/0.43.1536.821@0.43.1536.821" timestamp="1595690317754" />
     <state x="287" y="100" key="SettingsEditor" timestamp="1594712638247">
       <screen x="0" y="43" width="1536" height="821" />
     </state>
@@ -104,9 +104,9 @@
       <screen x="0" y="43" width="1536" height="821" />
     </state>
     <state x="425" y="208" key="run.anything.popup/0.43.1536.821@0.43.1536.821" timestamp="1594196621004" />
-    <state x="431" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1595586395702">
+    <state x="431" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1595689962868">
       <screen x="0" y="43" width="1536" height="821" />
     </state>
-    <state x="431" y="185" width="672" height="678" key="search.everywhere.popup/0.43.1536.821@0.43.1536.821" timestamp="1595586395702" />
+    <state x="431" y="185" width="672" height="678" key="search.everywhere.popup/0.43.1536.821@0.43.1536.821" timestamp="1595689962868" />
   </component>
 </project>
