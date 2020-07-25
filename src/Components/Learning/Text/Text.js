@@ -29,9 +29,9 @@ const Text = ({dispatch, subject, category}) => {
         <div className="learningText" onClick={(e) => {
             closeInput(e, newCategoryTextTitle, setNewCategoryTextTitle)
         }}>
-            <div onClick={() => setNewCategoryTextTitle(true)} className="learningHeader">
-                {category.name.length > 30 ? category.name.slice(0, 30) + "..." : category.name}
-            </div>
+                <div onClick={() => setNewCategoryTextTitle(true)} className="learningHeader">
+                    {category.name.length > 30 ? category.name.slice(0, 30) + "..." : category.name}
+                </div>
                 <div className="learningText__window">
                         <div className='learningList'>
                             <div className="learningList__add">

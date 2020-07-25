@@ -24,6 +24,7 @@
     &:hover {
       opacity: .8;
     }
+
   }
 
   &List {
@@ -61,6 +62,7 @@
         position: relative;
         overflow-wrap: anywhere;
         padding-left: 10px;
+
         &:hover {
           background-color: #624ad8;
           transform: scale(0.991);
@@ -74,9 +76,9 @@
           cursor: grab;
         }
 
-&:focus{
-  outline: none;
-}
+        &:focus {
+          outline: none;
+        }
       }
     }
 
@@ -104,6 +106,7 @@
     position: absolute;
     top: 8px;
     right: 8px;
+
     & svg {
       cursor: pointer;
       width: 17px;
@@ -138,14 +141,17 @@
       margin-left: 20px;
     }
 
+    &Header__wrapper {
+      width: 100%;
+      background-color: #fff;
+    }
+
     &__window {
       position: relative;
       height: 100%;
     }
   }
 }
-
-
 
 
 .learningList__list::-webkit-scrollbar {

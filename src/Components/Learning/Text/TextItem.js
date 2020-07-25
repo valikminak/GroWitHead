@@ -37,16 +37,18 @@ const TextItem = ({dispatch, text, subject, category}) => {
 
     return (
         <SectionText show={show} textAdded={textAdded}>
-            <div className="textItemHeader">
+            <div className="textItemHeader__wrapper">
+                <div className="textItemHeader">
                 <span
                     className="textItemHeader__title">{text.name.length > 10 ? text.name.slice(0, 10) + "..." : text.name}</span>
-                <div className="textItemHeader__nav">
-                    {show && <span onClick={() => setShow(false)}><ResizeHide width={"11px"} height={"11px"}/></span>}
-                    {show && <span onClick={addCategoryText}><EditDone width={"13px"} height={"13px"}/></span>}
-                    {!show && <span className="expandTextItem" onClick={() => setShow(true)}><ResizeShow width={"10px"}
-                                                                                                         height={"10px"}/></span>}
-                    {!show && <span className="deleteTextItem" onClick={deleteCategoryText}><Close width={"17px"}
-                                                                                                   height={"17px"}/></span>}
+                    <div className="textItemHeader__nav">
+                        {show && <span onClick={() => setShow(false)}><ResizeHide width={"11px"} height={"11px"}/></span>}
+                        {show && <span onClick={addCategoryText}><EditDone width={"13px"} height={"13px"}/></span>}
+                        {!show && <span className="expandTextItem" onClick={() => setShow(true)}><ResizeShow width={"10px"}
+                                                                                                             height={"10px"}/></span>}
+                        {!show && <span className="deleteTextItem" onClick={deleteCategoryText}><Close width={"17px"}
+                                                                                                       height={"17px"}/></span>}
+                    </div>
                 </div>
             </div>
             {show && <div className="textItemContent">

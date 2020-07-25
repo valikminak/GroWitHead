@@ -10,7 +10,6 @@ const App = () => {
 
     return (
         <div className="app">
-
                     <Switch>
                         <Route path={'/'} component={MainPage} exact/>
                         <Route path={'/learning/:category?/:text?'} component={Learning}/>

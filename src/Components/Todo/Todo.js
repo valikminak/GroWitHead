@@ -3,6 +3,7 @@ import './style.scss'
 import TodoBoard from "./TodoBoard";
 import {Redirect, Route, Switch} from "react-router";
 import {Link} from "react-router-dom";
+import {ShowBoards} from "../../SVG/SVG";
 
 let boardId = 1;
 
@@ -57,7 +58,7 @@ const Todo = () => {
                             <span className="todoHeader__boards"
                                   onClick={() => boardList.length > 0 && setShowBoard(true)}>
                                 boards
-                                <img src="/Images/showBoards.svg" alt="Boards"/>
+                                <ShowBoards height={"15px"} width={"15px"}/>
                             </span>
                                 <h1>{activeBoardName}</h1>
                             </div>

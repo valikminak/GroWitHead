@@ -93,6 +93,8 @@ const TodoColumn = memo(({board, boardList, column, setNewBoard}) => {
                 setNewColumnName(false)
             }
         };
+
+
         return (
             <div className="columnWrapper">
                 <div className="column">
@@ -103,13 +105,15 @@ const TodoColumn = memo(({board, boardList, column, setNewBoard}) => {
                                   onBlur={(e) => changeColumnName(e, column.id)} value={changeColumnValue}
                                   onChange={(e) => setColumnValue(e.target.value)}/>}
                     </div>
-                    <Droppable droppableId={column.name}>
+                    <Droppable droppableId={column.name+column.id}>
                         {(provided) => {
                             return (
                                 <ul
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
-                                    className="columnContent">
+                                    className="columnContent"
+                                style={{height:`${(30.5*column.cards.length)+10}px`}}
+                                >
                                     {column.cards && column.cards.map((card, index) => {
                                             return (
                                                 <TodoCard key={card.id}

@@ -25,7 +25,11 @@ z-index:${({show}) => show ? "1" : "0"};
   width:${({show}) => show ? "190px" : "100%"};
   transform: ${({show}) => show ? "translateX(600px)" : "translateX(0)"};
   transition: all .3s; 
-
+    &__wrapper{
+    width:100%;
+   background-color:"white";
+   border-radius:${({show}) => show ? "0" : "15px"};;
+    }
   &__title {
     margin-left: 10px;
   }

@@ -2,6 +2,7 @@ import React, {memo, useEffect, useRef, useState} from 'react';
 import './style.scss'
 import {CardNameStyled} from "../Styled/TodoItemStyled/CardNameStyled";
 import {Draggable} from "react-beautiful-dnd";
+import {Delete, Done, Important} from "../../SVG/SVG";
 
 const TodoCard = memo(({card, index, deleteCard, importantCard, cardDone}) => {
     const [change, setChange] = useState(false);
@@ -37,7 +38,7 @@ const TodoCard = memo(({card, index, deleteCard, importantCard, cardDone}) => {
         <Draggable
             key={card.id}
             index={index}
-            draggableId={card.name}
+            draggableId={card.name + card.id}
         >
             {(provider) => {
                 return (
@@ -54,15 +55,17 @@ const TodoCard = memo(({card, index, deleteCard, importantCard, cardDone}) => {
                         <CardNameStyled important={card.important} done={card.done}>{card.name}</CardNameStyled>}
                         {!change &&
                         <div className="cardNav">
-                <span className="cardNav__important"
-                      onClick={setImportant}><img
-                    style={{transform: card.important ? "scale(1.2)" : "scale(1)"}} src="/Images/important.svg"
-                    alt=""/></span>
-                            <span className="cardNav__done" onClick={setDone}><img
-                                style={{transform: card.done ? "scale(1.2)" : "scale(1)"}} src="/Images/done.svg"
-                                alt=""/></span>
-                            <span className="cardNav__delete" onClick={deleteItem}><img src="/Images/delete.svg"
-                                                                                        alt=""/></span>
+                            <span className="cardNav__important" onClick={setImportant}>
+                                <Important height={card.important ? "17px" : "15px"}
+                                           width={card.important ? "17px" : "15px"}/>
+                            </span>
+                            <span className="cardNav__done" onClick={setDone}>
+                                <Done height={card.done ? "17px" : "15px"}
+                                      width={card.done ? "17px" : "15px"}/>
+                            </span>
+                            <span className="cardNav__delete" onClick={deleteItem}>
+                                <Delete width={"15px"} height={"15px"}/>
+                            </span>
                         </div>}
                     </li>
                 )

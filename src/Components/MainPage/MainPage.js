@@ -6,7 +6,7 @@ const MainPage = () => {
     return (
         <div className="main">
             <div className="mainLogo">
-                <img src="/Images/GroWitHead.png" alt="Logo"/>
+                <img src="https://res.cloudinary.com/minak/image/upload/v1595687487/GroWitHead/GroWitHead_hqtaos.png" alt="Logo"/>
             </div>
             <div className="mainList">
                 <Link to={'/learning'}>

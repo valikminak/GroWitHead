@@ -120,6 +120,10 @@
   padding-right: 20px;
   margin-left: 20px;
 }
+.learningTextHeader__wrapper {
+  width: 100%;
+  background-color: #fff;
+}
 .learningText__window {
   position: relative;
   height: 100%;

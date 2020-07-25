@@ -29,8 +29,31 @@ const TodoBoard = ({board, boardList, inputValue, setInputValue, setNewBoard, ad
         }
 
     };
-    const handleDragEnd = () => {
-
+    const handleDragEnd = ({destination, source}) => {
+        if (!destination) {
+            return;
+        }
+        if (destination.index === source.index && destination.droppableId === source.droppableId) {
+            return;
+        }
+        const itemCopy = board.columns.find((column) => column.name + column.id === source.droppableId).cards[source.index];
+        setNewBoard(prev => {
+            prev.map((b) => b.id === board.id
+                ? {
+                    ...b,
+                    columns: b.columns.find((column) => column.name + column.id === source.droppableId).cards.splice(source.index, 1)
+                }
+                : b
+            );
+            prev.map((b) => b.id === board.id
+                ? {
+                    ...b,
+                    columns: b.columns.find((column) => column.name + column.id === destination.droppableId).cards.splice(destination.index, 0,itemCopy)
+                }
+                : b
+            );
+            return prev
+        });
     };
     return (
         <div className="todoContent">
