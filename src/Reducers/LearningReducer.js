@@ -4,7 +4,7 @@ export const learningReducer = (state, {type, payload}) => {
             return [
                 ...state,
                 {
-                    name: payload.subjectName, id: payload.id,
+                    name: payload.subjectName, id: payload.id, color:payload.subjectColor,
                     category: []
                 }
             ];

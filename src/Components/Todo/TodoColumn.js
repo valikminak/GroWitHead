@@ -2,10 +2,11 @@ import React, {memo, useEffect, useRef, useState} from 'react';
 import './style.scss'
 import TodoCard from "./TodoCard";
 import {Droppable} from "react-beautiful-dnd";
+import {DeleteColumn} from "../../SVG/SVG";
 
 let cardId = 2000;
 
-const TodoColumn = memo(({board, boardList, column, setNewBoard}) => {
+const TodoColumn = memo(({board, boardList, column, setNewBoard,deleteColumn}) => {
         const addImportantDone = (isImportant = false, importantCardId = null, isDone = false, doneCardId = null) => {
             return boardList.map((boardListItem) => boardListItem.id === board.id
                 ? {
@@ -86,6 +87,9 @@ const TodoColumn = memo(({board, boardList, column, setNewBoard}) => {
                 )
             );
         };
+    const deleteItem = () => {
+        deleteColumn(column.id)
+    };
         const changeColumnName = (e, columnId) => {
             if ((changeColumnValue && changeColumnValue.length > 0 && changeColumnValue !== " " && e.key === "Enter")
                 || (changeColumnValue && changeColumnValue.length > 0 && changeColumnValue !== " " && e.type === "blur")) {
@@ -99,20 +103,26 @@ const TodoColumn = memo(({board, boardList, column, setNewBoard}) => {
             <div className="columnWrapper">
                 <div className="column">
                     <div className="columnHeader">
-                        {!newColumnName && <h5 onClick={() => setNewColumnName(true)}>{column.name}</h5>}
-                        {newColumnName &&
-                        <textarea ref={columnNameRef} onKeyDown={(e) => changeColumnName(e, column.id)}
-                                  onBlur={(e) => changeColumnName(e, column.id)} value={changeColumnValue}
-                                  onChange={(e) => setColumnValue(e.target.value)}/>}
+                        <div>
+                            {!newColumnName &&
+                            <h5 onClick={() => setNewColumnName(true)}>{column.name}</h5>}
+                            {newColumnName &&
+                            <textarea maxLength={15} ref={columnNameRef} onKeyDown={(e) => changeColumnName(e, column.id)}
+                                      onBlur={(e) => changeColumnName(e, column.id)} value={changeColumnValue}
+                                      onChange={(e) => setColumnValue(e.target.value)}/>}
+                        </div>
+                        <div style={{cursor:"pointer"}} onClick={deleteItem}>
+                            <DeleteColumn/>
+                        </div>
                     </div>
-                    <Droppable droppableId={column.name+column.id}>
+                    <Droppable droppableId={column.name + column.id}>
                         {(provided) => {
                             return (
                                 <ul
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                     className="columnContent"
-                                style={{height:`${(30.5*column.cards.length)+10}px`}}
+                                    style={{height: `${(30.5 * column.cards.length)}px`}}
                                 >
                                     {column.cards && column.cards.map((card, index) => {
                                             return (
@@ -140,6 +150,7 @@ const TodoColumn = memo(({board, boardList, column, setNewBoard}) => {
                         {addCard &&
                         <div onKeyDown={(e) => addNewCard(e)} className="columnFooter__input">
                     <textarea
+                        maxLength={15}
                         onBlur={(e) => addNewCard(e)}
                         ref={columnCardNameRef}
                         value={inputCardValue}

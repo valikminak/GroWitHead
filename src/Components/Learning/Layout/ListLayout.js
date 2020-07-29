@@ -19,7 +19,7 @@ const ListLayout = ({newItem, inputValue, setInputValue, addItem}) => {
                 {newItem
                 && <SwitchTransition component={false}>
                     <CSSTransition key={true} timeout={300} appear={true} classNames={'animInput'}>
-                        <input type="text" ref={inputRef} autoFocus={true} value={inputValue}
+                        <input maxLength={20} type="text" ref={inputRef} autoFocus={true} value={inputValue}
                                onKeyDown={(e) => {
                                    addItem(e)
                                }}

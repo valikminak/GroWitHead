@@ -1,12 +1,13 @@
 import React, {useReducer} from 'react';
 import './Style.scss'
-import {Route, Switch, withRouter} from "react-router-dom";
+import {Link, Route, Switch, withRouter} from "react-router-dom";
 import Category from "./Category";
 import Subjects from "./Subjects";
 import Text from "./Text/Text";
 import {learningReducer} from "../../Reducers/LearningReducer";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {replaced} from "./Layout/ListLayout";
+import {Home} from "../../SVG/SVG";
 
 
 
@@ -24,6 +25,7 @@ const Learning = (props) => {
 
     return (
         <div className="learning">
+            <div className="home"><Link to={'/'}><Home width={"70px"} height={"30px"}/></Link></div>
             <Subjects dispatch={dispatch} subjects={state}/>
             <TransitionGroup component={null}>
                 <CSSTransition key={category} exit={false} timeout={500} classNames={'animCategoryPage'}>

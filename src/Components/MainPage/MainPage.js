@@ -9,14 +9,14 @@ const MainPage = () => {
                 <img src="https://res.cloudinary.com/minak/image/upload/v1595687487/GroWitHead/GroWitHead_hqtaos.png" alt="Logo"/>
             </div>
             <div className="mainList">
-                <Link to={'/learning'}>
-                    <div className="mainList__choice learning">
-                        Learning
-                    </div>
-                </Link>
                 <Link to={'/todo'}>
                     <div className="mainList__choice todo">
                         Todo
+                    </div>
+                </Link>
+                <Link to={'/learning'}>
+                    <div className="mainList__choice learning">
+                        Learning
                     </div>
                 </Link>
             </div>

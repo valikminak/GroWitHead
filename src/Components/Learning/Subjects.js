@@ -7,21 +7,20 @@ import {closeInput, handleDragEnd} from "../../Functions";
 
 
 let idSubject = 3000;
-
-
+const colors = ["#5199FF", "#1771F1", "#E4FFF9", "#B5FBDD", "#76FEC5", "#FFFCBB", "#FFE55E", "#FBCEB5", "#FE9E76", "#FFDFDC", "#FF9CA1", "#FF6A61", "#F6522E", "#EF2FA2", "#E47CCD"];
 const Subjects = ({dispatch, subjects}) => {
     const [inputValue, setInputValue] = useState('');
     const [newSubject, setNewSubject] = useState(false);
 
     const addSubject = (e) => {
-        if ((inputValue.length > 0 && e.key === "Enter") || (inputValue.length > 0 && e.target.nodeName === "BUTTON")) {
+        if ((inputValue.length > 0 && e.key === "Enter") || (inputValue.length > 0 && e.target.nodeName === "BUTTON")|| (inputValue.length > 0 && e.target.className === "learningHeader")) {
             dispatch({
                 type: "ADD_NEW_SUBJECT",
                 payload: {
                     id: idSubject++,
-                    subjectName: inputValue
+                    subjectName: inputValue,
+                    subjectColor: colors[Math.floor(Math.random() * colors.length)]
                 },
-
             });
             setNewSubject(false);
             setInputValue('')
@@ -35,20 +34,29 @@ const Subjects = ({dispatch, subjects}) => {
             }
         })
     };
-    const subjectDragEnd = ({draggableId, destination,source}) => {
+    const subjectDragEnd = ({draggableId, destination, source}) => {
         if (!destination) {
             return;
         }
         if (destination.droppableId !== source.droppableId) {
             return;
         }
-        handleDragEnd(dispatch,subjects,draggableId,destination,"subjects")
+        handleDragEnd(dispatch, subjects, draggableId, destination, "subjects")
+    };
+    const setSubject = (e) => {
+        if (!newSubject) {
+            setNewSubject(true)
+        }
+        if (newSubject) {
+            addSubject(e);
+            setNewSubject(false)
+        }
     };
     return (
         <div className="learningSubjects" onClick={(e) => closeInput(e, newSubject, setNewSubject)}>
             <NavLink to={'/learning'}>
-                <div onClick={() => setNewSubject(true)} className="learningHeader">
-                    Learning
+                <div onClick={setSubject} className="learningHeader">
+                    Add Learning
                 </div>
             </NavLink>
             <DragDropContext onDragEnd={subjectDragEnd}>
@@ -67,21 +75,22 @@ const Subjects = ({dispatch, subjects}) => {
                                                 <Draggable
                                                     key={subject.id}
                                                     index={index}
-                                                    draggableId={subject.name+subject.id}
+                                                    draggableId={subject.name + subject.id}
                                                 >
                                                     {(provider) => {
                                                         return (
-                                                            <li
-                                                                ref={provider.innerRef}
+                                                            <li ref={provider.innerRef}
                                                                 {...provider.draggableProps}
                                                                 {...provider.dragHandleProps}
                                                             >
-                                                                <NavLink
-                                                                    to={`/learning/${replaced(subject.name)}${subject.id}`}>
-                                                                    {subject.name.length > 20 ? subject.name.slice(0, 20) + "..." : subject.name}
-                                                                </NavLink>
-                                                                <span className="deleteItem"
-                                                                      onClick={() => deleteItem(subject.id)}><Close/></span>
+                                                                <div style={{backgroundColor: subject.color}}>
+                                                                    <NavLink
+                                                                        to={`/learning/${replaced(subject.name)}${subject.id}`}>
+                                                                        {subject.name}
+                                                                    </NavLink>
+                                                                    <span className="deleteItem"
+                                                                          onClick={() => deleteItem(subject.id)}><Close/></span>
+                                                                </div>
                                                             </li>
                                                         )
                                                     }}

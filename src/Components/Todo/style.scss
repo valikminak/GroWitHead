@@ -24,6 +24,24 @@ body {
   background-color: #4BBF6B;
   overflow-y: hidden;
 
+  .todoHeader__boardsList::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.13);
+    background-color: #45aa5d;
+    border-radius: 10px;
+    width: 20%;
+  }
+
+  .todoHeader__boardsList::-webkit-scrollbar {
+    width: 10px;
+    background-color: #45aa5d;
+    height: 10px;
+  }
+
+  .todoHeader__boardsList::-webkit-scrollbar-thumb {
+    background-color: rgba(187, 191, 201, 0.53);
+    border-radius: 10px;
+
+  }
   &Header {
     color: #ffffff;
 
@@ -33,7 +51,7 @@ body {
       position: relative;
     }
 
-    &__boards {
+    &__nav {
       position: absolute;
       display: flex;
       justify-content: center;
@@ -42,15 +60,52 @@ body {
       top: 10px;
       cursor: pointer;
       font-size: 11px;
+      transition: all .2s;
 
-      & img {
-        width: 30px;
-        height: 30px;
+      & svg:hover path {
+        fill: #FFB423;
+      }
+
+    }
+
+    &__change {
+      position: relative;
+      width: 200px;
+      background-color: rgba(255, 255, 255, .5);
+      border-radius: 5px;
+
+      & textarea {
+        resize: none;
+        border: none;
+        padding: 5px;
+        outline: none;
+        background-color: rgba(255, 255, 255, 0);
+        color: #ffffff;
+      }
+
+      & span {
+        position: absolute;
+        top: 17px;
+        right: -3px;
+        width: 45px;
+        height: 15px;
+        font-size: 13px;
+        transform: rotate(90deg);
+        background-color: rgba(255, 255, 255, 0);
+        cursor: pointer;
+        transition: all .2s;
+
+        &:hover {
+          color: #FFB423
+        }
       }
     }
 
-
     &__boardsList {
+      & .activeBoard {
+        color: #FFB423
+      }
+
       @include header;
       justify-content: flex-start;
       white-space: nowrap;
@@ -69,7 +124,7 @@ body {
 
     &__name {
       text-align: right;
-      margin: 10px;
+      margin: 10px 10px 40px 0;
       height: 35px;
     }
 
@@ -82,39 +137,35 @@ body {
     }
   }
 
-  .todoContent::-webkit-scrollbar {
-    position: absolute;
-    bottom: 0;
-  }
 
   .todoContent::-webkit-scrollbar-track {
-
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #F5F5F5;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.13);
+    background-color: #45aa5d;
     border-radius: 10px;
+    width: 20%;
   }
 
   .todoContent::-webkit-scrollbar {
     width: 10px;
-    background-color: #BFC4CE;
+    background-color: #45aa5d;
     height: 10px;
   }
 
   .todoContent::-webkit-scrollbar-thumb {
-    background-color: #bbbfc9;
+    background-color: rgba(187, 191, 201, 0.53);
     border-radius: 10px;
 
   }
 
   &Content {
-    height: 100%;
+    height: 79vh;
     white-space: nowrap;
     overflow-y: hidden;
+    overflow-x: auto;
     padding-left: 10px;
 
     &__add {
       @include add(272px, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.35));
-
     }
 
     &__input {
@@ -141,7 +192,9 @@ body {
   &Wrapper {
     width: 272px;
     margin: 0 4px;
-    height: 100%;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
@@ -192,7 +245,7 @@ body {
   }
 
   &Content {
-    max-height: 400px;
+    max-height: 365px;
     overflow-y: auto;
     overflow-x: hidden;
     margin: 0;
@@ -200,6 +253,8 @@ body {
   }
 
   &Footer {
+    margin-top: 10px;
+
     &__add {
       max-height: 33px;
       min-height: 33px;
@@ -243,6 +298,8 @@ body {
         resize: none;
         border: none;
         outline: none;
+        margin-top: 3px;
+
       }
 
     }
@@ -282,7 +339,8 @@ body {
   align-items: center;
   background-color: #ffffff;
   padding: 5px 10px;
-  height: 25px;
+  min-height: 25px;
+  width: 260px;
   border-radius: 5px;
   box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
   margin-bottom: 5px;
@@ -291,6 +349,12 @@ body {
 
   &Change {
     width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 5px 0 0 5px;
     border: none;
     border-radius: 5px;
     outline: none;
@@ -315,6 +379,33 @@ body {
     &__done, &__delete {
       margin-left: 8px;
 
+    }
+  }
+}
+
+
+
+
+@media (max-width: 860px) {
+  .todo{
+    &Header{
+      &__title{
+        justify-content: flex-end;
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width: 600px) {
+  .todo{
+    &Header{
+      &__title{
+        align-items: flex-end;
+        font-size: 12px;
+      }
+      &__change{
+        width: 175px;
+      }
     }
   }
 }

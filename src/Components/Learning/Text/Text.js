@@ -9,7 +9,7 @@ const Text = ({dispatch, subject, category}) => {
     const [inputValue, setInputValue] = useState('');
     const [newCategoryTextTitle, setNewCategoryTextTitle] = useState(false);
     const addCategoryText = (e) => {
-        if ((inputValue.length > 0 && e.key === "Enter") || (inputValue.length > 0 && e.target.nodeName === "BUTTON")) {
+        if ((inputValue.length > 0 && e.key === "Enter") || (inputValue.length > 0 && e.target.nodeName === "BUTTON")|| (inputValue.length > 0 && e.target.innerHTML === "Add "+category.name)) {
             dispatch({
                 type: "ADD_NEW_CATEGORY_TEXT_TITLE",
                 payload:
@@ -24,13 +24,21 @@ const Text = ({dispatch, subject, category}) => {
             setInputValue('')
         }
     };
-
+    const setText = (e) => {
+        if (!newCategoryTextTitle) {
+            setNewCategoryTextTitle(true)
+        }
+        if (newCategoryTextTitle) {
+            addCategoryText(e);
+            setNewCategoryTextTitle(false)
+        }
+    };
     return (
         <div className="learningText" onClick={(e) => {
             closeInput(e, newCategoryTextTitle, setNewCategoryTextTitle)
         }}>
-                <div onClick={() => setNewCategoryTextTitle(true)} className="learningHeader">
-                    {category.name.length > 30 ? category.name.slice(0, 30) + "..." : category.name}
+                <div onClick={setText} className="learningHeader">
+                    Add {category.name}
                 </div>
                 <div className="learningText__window">
                         <div className='learningList'>

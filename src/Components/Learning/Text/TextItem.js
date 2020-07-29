@@ -37,10 +37,14 @@ const TextItem = ({dispatch, text, subject, category}) => {
 
     return (
         <SectionText show={show} textAdded={textAdded}>
-            <div className="textItemHeader__wrapper">
-                <div className="textItemHeader">
+            <div className="textItemHeader__wrapper"
+            style={{backgroundColor:"#ffffff"}}
+            >
+                <div className="textItemHeader"
+                     style={{backgroundColor: subject.color}}
+                >
                 <span
-                    className="textItemHeader__title">{text.name.length > 10 ? text.name.slice(0, 10) + "..." : text.name}</span>
+                    className="textItemHeader__title">{text.name}</span>
                     <div className="textItemHeader__nav">
                         {show && <span onClick={() => setShow(false)}><ResizeHide width={"11px"} height={"11px"}/></span>}
                         {show && <span onClick={addCategoryText}><EditDone width={"13px"} height={"13px"}/></span>}

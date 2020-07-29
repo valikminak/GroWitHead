@@ -15,7 +15,6 @@ z-index:${({show}) => show ? "1" : "0"};
 .textItemHeader {
   display:flex;
   justify-content: space-between;
-  background-color: #5843BE;
   border-radius: ${({show}) => show ? "0" : "15px"};;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -27,7 +26,6 @@ z-index:${({show}) => show ? "1" : "0"};
   transition: all .3s; 
     &__wrapper{
     width:100%;
-   background-color:"white";
    border-radius:${({show}) => show ? "0" : "15px"};;
     }
   &__title {

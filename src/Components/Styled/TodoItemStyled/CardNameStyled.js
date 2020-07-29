@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 
 const CardNameStyles = styled.span`
-color:${({important}) => important ? "red" : "black"};
+color: "black";
 font-weight:${({important}) => important ? "900" : "300"};
-font-size:${({important}) => important ? "14px" : "13px"};
+font-size: "13px";
+color:${({important})=>important?"#FFB423":"#000000"};
 text-decoration: ${({done}) => done ? "line-through" : "none"};
 width:165px;
 word-wrap:break-word;
