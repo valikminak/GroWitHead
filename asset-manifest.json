@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/GroWitHead/static/css/main.d214692f.chunk.css",
-    "main.js": "/GroWitHead/static/js/main.581080fa.chunk.js",
-    "main.js.map": "/GroWitHead/static/js/main.581080fa.chunk.js.map",
+    "main.css": "/GroWitHead/static/css/main.f44665e4.chunk.css",
+    "main.js": "/GroWitHead/static/js/main.7d248868.chunk.js",
+    "main.js.map": "/GroWitHead/static/js/main.7d248868.chunk.js.map",
     "runtime-main.js": "/GroWitHead/static/js/runtime-main.d382324b.js",
     "runtime-main.js.map": "/GroWitHead/static/js/runtime-main.d382324b.js.map",
     "static/js/2.577bc804.chunk.js": "/GroWitHead/static/js/2.577bc804.chunk.js",
     "static/js/2.577bc804.chunk.js.map": "/GroWitHead/static/js/2.577bc804.chunk.js.map",
     "index.html": "/GroWitHead/index.html",
-    "precache-manifest.bc095c96c8839bf18533fce9a990d183.js": "/GroWitHead/precache-manifest.bc095c96c8839bf18533fce9a990d183.js",
+    "precache-manifest.fd901e5a49f0b76f3e578810db4f5c96.js": "/GroWitHead/precache-manifest.fd901e5a49f0b76f3e578810db4f5c96.js",
     "service-worker.js": "/GroWitHead/service-worker.js",
-    "static/css/main.d214692f.chunk.css.map": "/GroWitHead/static/css/main.d214692f.chunk.css.map",
+    "static/css/main.f44665e4.chunk.css.map": "/GroWitHead/static/css/main.f44665e4.chunk.css.map",
     "static/js/2.577bc804.chunk.js.LICENSE.txt": "/GroWitHead/static/js/2.577bc804.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d382324b.js",
     "static/js/2.577bc804.chunk.js",
-    "static/css/main.d214692f.chunk.css",
-    "static/js/main.581080fa.chunk.js"
+    "static/css/main.f44665e4.chunk.css",
+    "static/js/main.7d248868.chunk.js"
   ]
 }
