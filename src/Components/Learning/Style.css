@@ -142,6 +142,7 @@
 .learningText__window {
   position: relative;
   height: 100%;
+  width: 100%;
 }
 
 .learningList__list::-webkit-scrollbar {
