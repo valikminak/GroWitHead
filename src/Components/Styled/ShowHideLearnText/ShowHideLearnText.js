@@ -15,18 +15,21 @@ z-index:${({show}) => show ? "1" : "0"};
 .textItemHeader {
   display:flex;
   justify-content: space-between;
-  border-radius: ${({show}) => show ? "0" : "15px"};;
+  border-radius: ${({show}) => show ? "0" : "15px"};
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   align-items: center;
-  position: relative;
+  position: ${({show}) => show ? "absolute" : "relative"};
+  top:0px;
+  right:0px;
   height: 45px;
   width:${({show}) => show ? "190px" : "100%"};
-  transform: ${({show}) => show ? "translateX(600px)" : "translateX(0)"};
   transition: all .3s; 
     &__wrapper{
+    position:relative;
+    height:45px;
     width:100%;
-   border-radius:${({show}) => show ? "0" : "15px"};;
+    border-radius:${({show}) => show ? "0" : "15px"};;
     }
   &__title {
     margin-left: 10px;
@@ -64,16 +67,16 @@ z-index:${({show}) => show ? "1" : "0"};
 .textItemContent{
     height: 100%;
     & textarea{
-    height: 100%;
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding:10px;
-    border: none;
-    background-color: #fff3bf;
-    color: ${(props) => props.textAdded ? "rgba(0, 0, 0, 0.44)" : "black"};
-    resize: none;
-    outline: none;
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 10px;
+        border: none;
+        background-color: #fff3bf;
+        color: ${({textAdded}) => textAdded ? "rgba(0, 0, 0, 0.44)" : "black"};
+        resize: none;
+        outline: none;
     }
   }
 `;
@@ -82,3 +85,5 @@ z-index:${({show}) => show ? "1" : "0"};
 export const SectionText = ({children, show, textAdded}) => {
     return <SectionTextStyles show={show} textAdded={textAdded}>{children}</SectionTextStyles>
 };
+
+

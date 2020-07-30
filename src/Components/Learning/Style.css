@@ -7,11 +7,11 @@
 .learning {
   display: grid;
   grid-template: "home home home" auto "subjects category text" auto;
-  grid-template-columns: 2fr 3fr 6fr;
+  grid-template-columns: 3fr 4fr 5fr;
   background-color: #BDCCFF;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 .learning .home {
   grid-area: home;
@@ -88,7 +88,6 @@
 }
 .learningSubjects {
   grid-area: subjects;
-  width: 300px;
   height: 100vh;
   background-color: #ffffff;
   z-index: 3;
@@ -96,7 +95,6 @@
 }
 .learningCategory {
   grid-area: category;
-  width: 450px;
   height: 100vh;
   background-color: #ffffff;
   box-shadow: 1px 15px 15px 0 rgba(0, 0, 0, 0.1);
@@ -211,6 +209,76 @@
 .animTextPage-enter-active {
   transform: translateX(0);
   transition: transform 0.5s;
+}
+
+@media (max-width: 975px) {
+  .learning {
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .learning .home {
+    height: 35px;
+  }
+  .learningList {
+    overflow: auto;
+  }
+  .learningList__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100px;
+    width: 95%;
+    overflow: auto;
+  }
+  .learningList__list li {
+    width: 150px;
+    margin-left: 10px;
+  }
+  .learningHeader {
+    font-size: 14px;
+  }
+  .learningSubjects {
+    height: 200px;
+    width: 100%;
+  }
+  .learningCategory {
+    height: 200px;
+    width: 100%;
+  }
+  .learningText {
+    height: 250px;
+    width: 100%;
+  }
+  .learningText__window {
+    overflow-y: auto;
+  }
+
+  .animCategoryPage-enter {
+    transform: translateY(-1000%);
+    transition: transform 0.5s;
+  }
+
+  .animCategoryPage-enter-active {
+    transform: translateY(-30%);
+    transition: transform 0.5s ease;
+  }
+
+  .animTextPage-enter {
+    transform: translateY(-1000%);
+    transition: transform 0.5s;
+  }
+
+  .animTextPage-enter-active {
+    transform: translateY(0);
+    transition: transform 0.5s;
+  }
+}
+@media (max-width: 620px) {
+  .learningHeader {
+    text-align: center;
+    font-size: 12px;
+  }
 }
 
 /*# sourceMappingURL=Style.css.map */

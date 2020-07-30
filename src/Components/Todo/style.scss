@@ -387,9 +387,9 @@ body {
 
 
 @media (max-width: 860px) {
-  .todo{
-    &Header{
-      &__title{
+  .todo {
+    &Header {
+      &__title {
         justify-content: flex-end;
         font-size: 14px;
       }
@@ -397,6 +397,11 @@ body {
   }
 }
 @media (max-width: 600px) {
+  .column{
+    &Wrapper{
+      max-height: 510px;
+    }
+  }
   .todo{
     &Header{
       &__title{

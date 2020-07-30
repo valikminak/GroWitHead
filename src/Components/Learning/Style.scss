@@ -8,18 +8,19 @@
 .learning {
   display: grid;
   grid-template: "home home home" auto "subjects category text" auto;
-  grid-template-columns: 2fr 3fr 6fr;
+  grid-template-columns: 3fr 4fr 5fr;
   background-color: #BDCCFF;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: hidden;
 
   & .home {
     grid-area: home;
     height: 30px;
     background-color: #848FB2;
-    & svg{
-      &:hover path{
+
+    & svg {
+      &:hover path {
         fill: #E8D5D5;
       }
     }
@@ -34,11 +35,11 @@
     color: #ffffff;
     background-color: #4C5266;
     box-shadow: 1px 15px 15px 0 rgba(255, 255, 255, 255);
-cursor: pointer;
+    cursor: pointer;
+
     &:hover {
       color: #E8D5D5;
     }
-
   }
 
   &List {
@@ -70,6 +71,7 @@ cursor: pointer;
         margin-bottom: 10px;
         border-radius: 15px;
         position: relative;
+
         & div {
           display: flex;
           justify-content: center;
@@ -103,7 +105,6 @@ cursor: pointer;
 
   &Subjects {
     grid-area: subjects;
-    width: 300px;
     height: 100vh;
     background-color: #ffffff;
     z-index: 3;
@@ -112,7 +113,6 @@ cursor: pointer;
 
   &Category {
     grid-area: category;
-    width: 450px;
     height: 100vh;
     background-color: #ffffff;
     box-shadow: 1px 15px 15px 0 rgba(0, 0, 0, 0.1);
@@ -255,5 +255,97 @@ cursor: pointer;
 }
 
 
-// ITEM-LIST
+//MEDIA
+
+@media (max-width: 975px) {
+  .learning {
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+
+    & .home {
+      height: 35px;
+    }
+
+    &List {
+      overflow: auto;
+
+      &__list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 100px;
+        width: 95%;
+        overflow: auto;
+
+        & li {
+          width: 150px;
+          margin-left: 10px;
+
+          & + li {
+
+          }
+        }
+      }
+    }
+
+    &Header {
+      font-size: 14px;
+    }
+
+    &Subjects {
+
+      height: 200px;
+      width: 100%;
+    }
+
+    &Category {
+      height: 200px;
+      width: 100%;
+
+    }
+
+    &Text {
+      height: 250px;
+      width: 100%;
+
+      &__window {
+        overflow-y: auto;
+      }
+    }
+  }
+  .animCategoryPage-enter {
+    transform: translateY(-1000%);
+    transition: transform .5s;
+  }
+
+  .animCategoryPage-enter-active {
+    transform: translateY(-30%);
+    transition: transform .5s ease;
+  }
+  .animTextPage-enter {
+    transform: translateY(-1000%);
+    transition: transform .5s;
+  }
+
+  .animTextPage-enter-active {
+    transform: translateY(0);
+    transition: transform .5s;
+  }
+}
+
+@media (max-width: 620px) {
+  .learning {
+    &Header {
+      text-align: center;
+      font-size: 12px;
+    }
+
+    &Subjects {
+    }
+
+    &Category {
+    }
+  }
+}
 
