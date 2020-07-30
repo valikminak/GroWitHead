@@ -11,7 +11,6 @@
   grid-template-columns: 3fr 4fr 5fr;
   background-color: #BDCCFF;
   width: 100%;
-  height: 100vh;
   overflow-y: hidden;
 
   & .home {
@@ -45,7 +44,7 @@
   &List {
     width: 100%;
     max-height: 100vh;
-
+    overflow: auto;
     &__add {
       height: 30px;
 
@@ -59,7 +58,7 @@
     }
 
     &__list {
-      height: 600px;
+      height: 570px;
       width: 90%;
       margin-left: 5px;
       overflow-y: auto;
@@ -105,7 +104,6 @@
 
   &Subjects {
     grid-area: subjects;
-    height: 100vh;
     background-color: #ffffff;
     z-index: 3;
     box-shadow: 1px 15px 15px 0 rgba(0, 0, 0, 0.1);
@@ -113,7 +111,6 @@
 
   &Category {
     grid-area: category;
-    height: 100vh;
     background-color: #ffffff;
     box-shadow: 1px 15px 15px 0 rgba(0, 0, 0, 0.1);
     z-index: 2;
@@ -148,15 +145,16 @@
   &Text {
     grid-area: text;
     width: 100%;
-    height: 100vh;
     background-color: #ffffff;
     z-index: 1;
+
 
     &__list {
       display: grid;
       grid-template-columns: 3fr 3fr 3fr 3fr;
       grid-row-gap: 20px;
       grid-column-gap: 20px;
+      height: 570px;
       padding-right: 20px;
       margin-left: 20px;
     }
@@ -289,30 +287,24 @@
         }
       }
     }
-
     &Header {
       font-size: 14px;
     }
-
     &Subjects {
 
       height: 200px;
       width: 100%;
     }
-
     &Category {
       height: 200px;
       width: 100%;
-
     }
-
     &Text {
       height: 250px;
       width: 100%;
-
       &__window {
+        width: 100%;
         overflow-y: auto;
-
       }
     }
   }

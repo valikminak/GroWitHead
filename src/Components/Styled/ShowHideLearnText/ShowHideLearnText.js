@@ -8,7 +8,7 @@ right:0;
 left:0;
 bottom:0;
 width:100%;
-height:${({show}) => show ? "80%" : "45px"};
+height:${({show}) => show ? "100%" : "45px"};
 border-radius:${({show}) => show ? "0px" : "10px"};
 z-index:${({show}) => show ? "1" : "0"};
 
@@ -66,6 +66,7 @@ z-index:${({show}) => show ? "1" : "0"};
 
 .textItemContent{
     height: 100%;
+    width: 100%;
     & textarea{
         height: 100%;
         width: 100%;
