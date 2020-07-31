@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7601bc8b7a095a307a67cd3a6c72d295",
+    "revision": "cca32c1e4b78a0954830db8668828915",
     "url": "/GroWitHead/index.html"
   },
   {
-    "revision": "61b36f19b46dd2604caf",
-    "url": "/GroWitHead/static/css/main.fce89bd5.chunk.css"
+    "revision": "685018acd0228b23d8e1",
+    "url": "/GroWitHead/static/css/main.35cf23d1.chunk.css"
   },
   {
     "revision": "5e230648723099130a87",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/GroWitHead/static/js/2.577bc804.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "61b36f19b46dd2604caf",
+    "revision": "685018acd0228b23d8e1",
     "url": "/GroWitHead/static/js/main.fe7b3a71.chunk.js"
   },
   {

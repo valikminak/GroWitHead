@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/GroWitHead/static/css/main.fce89bd5.chunk.css",
+    "main.css": "/GroWitHead/static/css/main.35cf23d1.chunk.css",
     "main.js": "/GroWitHead/static/js/main.fe7b3a71.chunk.js",
     "main.js.map": "/GroWitHead/static/js/main.fe7b3a71.chunk.js.map",
     "runtime-main.js": "/GroWitHead/static/js/runtime-main.d382324b.js",
@@ -8,15 +8,15 @@
     "static/js/2.577bc804.chunk.js": "/GroWitHead/static/js/2.577bc804.chunk.js",
     "static/js/2.577bc804.chunk.js.map": "/GroWitHead/static/js/2.577bc804.chunk.js.map",
     "index.html": "/GroWitHead/index.html",
-    "precache-manifest.ffaf10a3bac88bda89c7bd91a8e73485.js": "/GroWitHead/precache-manifest.ffaf10a3bac88bda89c7bd91a8e73485.js",
+    "precache-manifest.61076381d82ecaa88f3ac9f22d1c5ede.js": "/GroWitHead/precache-manifest.61076381d82ecaa88f3ac9f22d1c5ede.js",
     "service-worker.js": "/GroWitHead/service-worker.js",
-    "static/css/main.fce89bd5.chunk.css.map": "/GroWitHead/static/css/main.fce89bd5.chunk.css.map",
+    "static/css/main.35cf23d1.chunk.css.map": "/GroWitHead/static/css/main.35cf23d1.chunk.css.map",
     "static/js/2.577bc804.chunk.js.LICENSE.txt": "/GroWitHead/static/js/2.577bc804.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d382324b.js",
     "static/js/2.577bc804.chunk.js",
-    "static/css/main.fce89bd5.chunk.css",
+    "static/css/main.35cf23d1.chunk.css",
     "static/js/main.fe7b3a71.chunk.js"
   ]
 }
