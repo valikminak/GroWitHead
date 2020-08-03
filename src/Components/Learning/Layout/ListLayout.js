@@ -7,7 +7,7 @@ export const replaced = (name, space) => {
     return name.replace(/\s+/g, space ? ' ' : '')
 };
 
-const ListLayout = ({newItem, inputValue, setInputValue, addItem}) => {
+const ListLayout = ({ newItem, inputValue, setInputValue, addItem }) => {
 
     const inputRef = useRef();
     useEffect(() => {

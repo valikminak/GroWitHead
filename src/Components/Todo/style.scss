@@ -42,6 +42,7 @@ body {
     border-radius: 10px;
 
   }
+
   &Header {
     color: #ffffff;
 
@@ -114,6 +115,10 @@ body {
       & a {
         color: #ffffff;
       }
+
+      &-item {
+        position: relative;
+      }
     }
 
     &__board {
@@ -122,8 +127,24 @@ body {
       cursor: pointer;
     }
 
+    &__board--delete {
+      position: absolute;
+      top: -15px;
+      transform: translateX(-50%);
+      right: 50%;
+      left: 50%;
+      cursor: default;
+
+      &:hover {
+        & svg line {
+          stroke: red;
+        }
+      }
+    }
+
     &__name {
-      text-align: right;
+      display: flex;
+      justify-content: flex-end;
       margin: 10px 10px 40px 0;
       height: 35px;
     }
@@ -159,6 +180,7 @@ body {
 
   &Content {
     height: 79vh;
+    display: flex;
     white-space: nowrap;
     overflow-y: hidden;
     overflow-x: auto;
@@ -166,6 +188,7 @@ body {
 
     &__add {
       @include add(272px, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.35));
+      height: 40px;
     }
 
     &__input {
@@ -384,8 +407,6 @@ body {
 }
 
 
-
-
 @media (max-width: 860px) {
   .todo {
     &Header {
@@ -394,23 +415,59 @@ body {
         font-size: 14px;
       }
     }
+
+    &Content {
+      &__add {
+        font-size: 12px;
+
+        &::before {
+          font-size: 15px;
+        }
+      }
+    }
   }
 }
+
 @media (max-width: 600px) {
-  .column{
-    &Wrapper{
+  .column {
+    &Wrapper {
       max-height: 510px;
     }
   }
-  .todo{
-    &Header{
-      &__title{
+  .todo {
+    &Header {
+      &__title {
         align-items: flex-end;
         font-size: 12px;
       }
-      &__change{
+
+      &__change {
         width: 175px;
+      }
+
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .column {
+    &Wrapper {
+      max-height: 480px;
+    }
+
+    &Footer {
+      &__addCard {
+        & button {
+          padding: 2px 20px;
+        }
+      }
+
+      &__input {
+        & textarea {
+          height: 30px;
+        }
       }
     }
   }
+
 }

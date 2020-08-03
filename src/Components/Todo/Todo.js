@@ -3,7 +3,7 @@ import './style.scss'
 import TodoBoard from "./TodoBoard";
 import {Redirect, Route, Switch} from "react-router";
 import {Link, NavLink} from "react-router-dom";
-import {Home, ShowBoards} from "../../SVG/SVG";
+import {DeleteBoard, Home, ShowBoards} from "../../SVG/SVG";
 
 let boardId = 1;
 
@@ -34,7 +34,11 @@ const Todo = ({history}) => {
     };
     const closeCreateInput = (e) => {
         if (boardList.length > 0) {
-            e.target.parentNode.className === "todoHeader__nav" || e.target.parentNode.parentNode.parentNode.className === "todoHeader__nav" ? setShowBoard(true) : setShowBoard(false);
+            e.target.parentNode.className === "todoHeader__nav"
+            || e.target.parentNode.parentNode.parentNode.className === "todoHeader__nav"
+            || e.target.parentNode.className === "todoHeader__board--delete"
+                ? setShowBoard(true)
+                : setShowBoard(false);
         }
         if (e.target.className === "todo" || e.target.className === "todoContent" || e.target.className === "todoHeader__name" || e.target.className === "todoContent__boardName") {
             setBoard(false);
@@ -45,8 +49,8 @@ const Todo = ({history}) => {
     const isActiveBoard = (boardName) => {
         setActiveBoardName(boardName)
     };
-    const changeBoardName = (e) => {
-        if (activeBoardName.length > 0&&activeBoardName!==" ") {
+    const changeBoardName = () => {
+        if (activeBoardName.length > 0 && activeBoardName !== " ") {
             setNewBoard(boardList.map((boardListItem) =>
                 boardListItem.id === activeBoardId ? {
                         ...boardListItem,
@@ -59,16 +63,25 @@ const Todo = ({history}) => {
         }
 
     };
+    const deleteBoard = (boardId) => {
+        setNewBoard(prevBoardList => prevBoardList.filter(boardListItem => boardListItem.id !== boardId));
+    };
 
     return (
         <div onClick={(e) => closeCreateInput(e)} className="todo">
             <div className="todoHeader">
                 {showBoards
                     ? <div className="todoHeader__boardsList">{boardList?.map((board) => (
-                        <NavLink activeClassName={"activeBoard"} key={board.id}
-                                 to={`/todo/${board.name.replace(/\s+/g, '').toLowerCase()}${board.id}`}>
-                            <span className="todoHeader__board">{board.name}</span>
-                        </NavLink>))}
+                        <div className="todoHeader__boardsList-item" key={board.id}>
+                            <NavLink activeClassName={"activeBoard"}
+                                     to={`/todo/${board.name.replace(/\s+/g, '').toLowerCase()}${board.id}`}>
+                                <span className="todoHeader__board">{board.name}</span>
+                            </NavLink>
+                            <span onClick={() => deleteBoard(board.id)} className="todoHeader__board--delete">
+                                <DeleteBoard width={"15px"} height={"15px"}/>
+                            </span>
+                        </div>
+                    ))}
                     </div>
                     : <div>
                         <div className="todoHeader__title">
@@ -82,8 +95,9 @@ const Todo = ({history}) => {
                             <h1 onClick={() => activeBoardName !== "Todo" && setChangeBoardName(true)}>{activeBoardName}</h1>}
                             {isChangeBoardName
                             && <div className="todoHeader__change">
-                                <textarea  ref={changeBoardNameRef} maxLength={30} spellCheck={false}
-                                          value={activeBoardName} onChange={(e) => setActiveBoardName(e.target.value.replace(/\s+/g, ' '))}/>
+                                <textarea ref={changeBoardNameRef} maxLength={30} spellCheck={false}
+                                          value={activeBoardName}
+                                          onChange={(e) => setActiveBoardName(e.target.value.replace(/\s+/g, ' '))}/>
                                 <span onClick={changeBoardName}>
                                     Change
                                 </span>
@@ -109,6 +123,7 @@ const Todo = ({history}) => {
                     }
                 </div>
             </div>
+
             <Switch>
                 {boardList.map((board) => <Route key={board.id}
                                                  path={`/todo/${board.name.replace(/\s+/g, '').toLowerCase()}${board.id}`}

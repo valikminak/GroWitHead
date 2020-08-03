@@ -27,7 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pasta-pizza/src/Components/Order/Order.module.scss" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pasta-pizza" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -76,7 +76,12 @@
       <workItem from="1595744661924" duration="328000" />
       <workItem from="1595922670494" duration="17112000" />
       <workItem from="1596006458472" duration="18726000" />
-      <workItem from="1596089675609" duration="11499000" />
+      <workItem from="1596089675609" duration="12901000" />
+      <workItem from="1596183276201" duration="17968000" />
+      <workItem from="1596271109797" duration="17000" />
+      <workItem from="1596272123381" duration="232000" />
+      <workItem from="1596272429507" duration="2472000" />
+      <workItem from="1596449154456" duration="6528000" />
     </task>
     <servers />
   </component>
@@ -97,18 +102,18 @@
       <screen x="0" y="43" width="1536" height="821" />
     </state>
     <state x="465" y="255" key="EditFileWatcherDialog/0.43.1536.821@0.43.1536.821" timestamp="1594785885408" />
-    <state x="549" y="211" key="FileChooserDialogImpl" timestamp="1596022426045">
+    <state x="549" y="211" key="FileChooserDialogImpl" timestamp="1596460119120">
       <screen x="0" y="43" width="1536" height="821" />
     </state>
-    <state x="549" y="211" key="FileChooserDialogImpl/0.43.1536.821@0.43.1536.821" timestamp="1596022426045" />
+    <state x="549" y="211" key="FileChooserDialogImpl/0.43.1536.821@0.43.1536.821" timestamp="1596460119120" />
     <state x="287" y="100" key="SettingsEditor" timestamp="1594712638247">
       <screen x="0" y="43" width="1536" height="821" />
     </state>
     <state x="287" y="100" key="SettingsEditor/0.43.1536.821@0.43.1536.821" timestamp="1594712638247" />
-    <state x="425" y="208" key="run.anything.popup" timestamp="1596096438041">
+    <state x="425" y="208" key="run.anything.popup" timestamp="1596201369566">
       <screen x="0" y="43" width="1536" height="821" />
     </state>
-    <state x="425" y="208" key="run.anything.popup/0.43.1536.821@0.43.1536.821" timestamp="1596096438041" />
+    <state x="425" y="208" key="run.anything.popup/0.43.1536.821@0.43.1536.821" timestamp="1596201369566" />
     <state x="431" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1596018782588">
       <screen x="0" y="43" width="1536" height="821" />
     </state>

@@ -3,7 +3,7 @@ import '../Style.scss'
 import {SectionText} from "../../Styled/ShowHideLearnText/ShowHideLearnText";
 import {Close, EditDone, ResizeHide, ResizeShow} from "../../../SVG/SVG";
 
-const TextItem = ({dispatch, text, subject, category}) => {
+const TextItem = ({ dispatch, text, subject, category }) => {
     const [inputValue, setInputValue] = useState(text.text);
     const [textAdded, setText] = useState(false);
     const [focusText, setFocusText] = useState(true);

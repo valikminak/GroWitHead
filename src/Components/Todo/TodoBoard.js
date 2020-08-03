@@ -1,11 +1,18 @@
 import React, {useEffect, useRef} from 'react';
 import TodoColumn from "./TodoColumn";
-import {DragDropContext} from "react-beautiful-dnd";
+import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import styled from "styled-components";
 
 let listId = 1000;
+
+
+const Container = styled.div`
+    padding-left: 10px;
+`;
+
 const TodoBoard = ({
                        board, boardList, inputValue, setInputValue, setNewBoard,
-                       addList, setAddList, isActiveBoard, isChangeBoardName,activeBoardName,changeBoardName,setActiveBoardId
+                       addList, setAddList, isActiveBoard, isChangeBoardName, activeBoardName, changeBoardName, setActiveBoardId
                    }) => {
     const newColumnNameRef = useRef();
     useEffect(() => {
@@ -39,30 +46,48 @@ const TodoBoard = ({
                 : boardListItem
             ))
     };
-    const handleDragEnd = ({destination, source}) => {
+    const handleDragEnd = ({destination, source, draggableId, type}) => {
         if (!destination) {
             return;
         }
         if (destination.index === source.index && destination.droppableId === source.droppableId) {
             return;
         }
+        if (type === "column") {
+            const columnCopy = board.columns.find((column) => column.name + column.id === draggableId);
+            const newColumnOrder = board.columns;
+            newColumnOrder.splice(source.index, 1);
+            newColumnOrder.splice(destination.index, 0, columnCopy);
+            setNewBoard(prevBoardList => {
+                prevBoardList.map((boardListItem) => boardListItem.id === board.id
+                    ? {
+                        ...boardListItem,
+                        columns: newColumnOrder
+                    }
+                    : boardListItem
+                );
+                return prevBoardList
+            });
+            return;
+        }
+
         const itemCopy = board.columns.find((column) => column.name + column.id === source.droppableId).cards[source.index];
-        setNewBoard(prev => {
-            prev.map((b) => b.id === board.id
+        setNewBoard(prevBoardList => {
+            prevBoardList.map((boardListItem) => boardListItem.id === board.id
                 ? {
-                    ...b,
-                    columns: b.columns.find((column) => column.name + column.id === source.droppableId).cards.splice(source.index, 1)
+                    ...boardListItem,
+                    columns: boardListItem.columns.find((column) => column.name + column.id === source.droppableId).cards.splice(source.index, 1)
                 }
-                : b
+                : boardListItem
             );
-            prev.map((b) => b.id === board.id
+            prevBoardList.map((boardListItem) => boardListItem.id === board.id
                 ? {
-                    ...b,
-                    columns: b.columns.find((column) => column.name + column.id === destination.droppableId).cards.splice(destination.index, 0, itemCopy)
+                    ...boardListItem,
+                    columns: boardListItem.columns.find((column) => column.name + column.id === destination.droppableId).cards.splice(destination.index, 0, itemCopy)
                 }
-                : b
+                : boardListItem
             );
-            return prev
+            return prevBoardList
         });
     };
 
@@ -74,19 +99,31 @@ const TodoBoard = ({
     return (
         <div onClick={changeName} className="todoContent">
             <DragDropContext onDragEnd={handleDragEnd}>
-                {board.columns && board.columns.map((column) => {
+                <Droppable droppableId="todo-board" direction="horizontal" type="column">
+                    {(provided) => {
                         return (
-                            <TodoColumn key={column.id} board={board}
-                                        boardList={boardList}
-                                        column={column} setNewBoard={setNewBoard}
-                                        deleteColumn={deleteColumn}/>
+                            <Container
+                                {...provided.droppableId}
+                                ref={provided.innerRef}
+                            >
+                                {board.columns && board.columns.map((column, index) => {
+                                        return (
+                                            <TodoColumn key={column.id} board={board}
+                                                        boardList={boardList}
+                                                        column={column} setNewBoard={setNewBoard}
+                                                        deleteColumn={deleteColumn} index={index}/>
+                                        )
+                                    }
+                                )}
+
+                            </Container>
                         )
-                    }
-                )}
+                    }}
+                </Droppable>
             </DragDropContext>
             {!addList && board.columns.length === 0 &&
             <div onClick={() => setAddList(true)} className="todoContent__add">
-                Add new list
+                <span>Add new list</span>
             </div>}
             {!addList && board.columns.length > 0 &&
             <div onClick={() => setAddList(true)} className="todoContent__add">

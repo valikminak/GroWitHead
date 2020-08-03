@@ -7,7 +7,6 @@ import Todo from "../Todo/Todo";
 import MainPage from "../MainPage/MainPage";
 
 const App = () => {
-
     return (
         <div className="app">
                     <Switch>

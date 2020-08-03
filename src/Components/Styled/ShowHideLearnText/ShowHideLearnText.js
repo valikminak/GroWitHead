@@ -29,6 +29,9 @@ z-index:${({show}) => show ? "1" : "0"};
     position:relative;
     height:45px;
     width:100%;
+    right: 0px;
+    top: 0px;
+    background-color: #ffffff;
     border-radius:${({show}) => show ? "0" : "15px"};;
     }
   &__title {
@@ -79,6 +82,12 @@ z-index:${({show}) => show ? "1" : "0"};
         resize: none;
         outline: none;
     }
+  }
+  @media (max-width: 375px) {
+  .textItemHeader {
+  height: 35px;
+  width:${({show}) => show ? "100px" : "100%"};
+  }
   }
 `;
 

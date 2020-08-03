@@ -8,7 +8,7 @@ import {closeInput, handleDragEnd} from "../../Functions";
 
 let idSubject = 3000;
 const colors = ["#5199FF", "#1771F1", "#E4FFF9", "#B5FBDD", "#76FEC5", "#FFFCBB", "#FFE55E", "#FBCEB5", "#FE9E76", "#FFDFDC", "#FF9CA1", "#FF6A61", "#F6522E", "#EF2FA2", "#E47CCD"];
-const Subjects = ({dispatch, subjects}) => {
+const Subjects = ({ dispatch, subjects }) => {
     const [inputValue, setInputValue] = useState('');
     const [newSubject, setNewSubject] = useState(false);
 

@@ -74,7 +74,7 @@ const TodoCard = memo(({card, index, deleteCard, importantCard, cardDone}) => {
             }}
         </Draggable>
     );
-})
+});
 
 export default TodoCard;
 

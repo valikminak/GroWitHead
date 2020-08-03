@@ -14,7 +14,7 @@ import {Home} from "../../SVG/SVG";
 
 
 const Learning = (props) => {
-    const {match:{params:{category,text}}} = props;
+    const { match: { params: { category,text } } } = props;
 
 
     const [state, dispatch] = useReducer(
@@ -50,7 +50,7 @@ const Learning = (props) => {
 
         </div>
     )
-        ;
+
 };
 
 export default withRouter(Learning);

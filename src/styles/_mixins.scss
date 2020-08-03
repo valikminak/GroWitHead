@@ -12,17 +12,18 @@
   height: 50px;
 }
 
-@mixin add($width,$bgc,$bgcHover){
-    display: inline-block;
-    text-align: center;
-    padding: 8px 6px;
-    width: $width;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: $bgc;
-    color: #ffffff;
-    position: relative;
-    margin-left: 20px;
+@mixin add($width,$bgc,$bgcHover) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 6px;
+  width: $width;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: $bgc;
+  color: #ffffff;
+  position: relative;
+  margin-left: 20px;
   &:hover {
     background-color: $bgcHover;
   }
@@ -38,9 +39,10 @@
 }
 
 
-@mixin input{
+@mixin input {
   display: inline-block;
   width: 272px;
+  height: 70px;
   background-color: #EBECF0;
   border-radius: 5px;
   padding: 5px;

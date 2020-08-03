@@ -8,7 +8,7 @@ import {closeInput, handleDragEnd} from "../../Functions";
 
 let idCategory = 4000;
 
-const Category = memo(({subject, dispatch}) => {
+const Category = memo(({ subject, dispatch }) => {
 
 
     const [inputValue, setInputValue] = useState('');
@@ -83,7 +83,6 @@ const Category = memo(({subject, dispatch}) => {
                                             draggableId={item.name + item.id}>
                                             {(provider) => {
                                                 return (
-
                                                     <li ref={provider.innerRef}
                                                         {...provider.draggableProps}
                                                         {...provider.dragHandleProps}>
